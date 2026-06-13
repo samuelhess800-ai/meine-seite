@@ -1,1 +1,112 @@
-<h1>Hallo Welt! Das ist meine erste GitHub-Webseite.</h1>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein digitales Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --accent-color: #16a085;
+            --accent-hover: #117a65;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            flex: 1;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin: 0;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #95a5a6;
+            background: #eef2f1;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Willkommen auf meiner Seite</h1>
+            <p>Digitaler Spielplatz & Projekt-Sandbox</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2>Über dieses Projekt</h2>
+                <p>Diese Webseite wird komplett kostenlos über <strong>GitHub Pages</strong> gehostet. Sie dient als zentraler Ort, um Ideen auszuprobieren, Code zu testen oder Workflows zu dokumentieren.</p>
+            </div>
+
+            <div class="card">
+                <h2>Aktuelle Fokusbereiche</h2>
+                <p>Egal ob technische Planungen, Skripte oder digitale Notizen – hier entsteht Stück für Stück eine Übersicht meiner Arbeiten und Experimente.</p>
+                <a href="https://github.com" target="_blank" class="btn">Mein GitHub Profil</a>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Gehostet via GitHub Pages</p>
+    </footer>
+
+</body>
+</html>
