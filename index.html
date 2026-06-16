@@ -1,112 +1,72 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mein digitales Portfolio</title>
-    <style>
-        :root {
-            --bg-color: #f4f7f6;
-            --card-bg: #ffffff;
-            --text-color: #2c3e50;
-            --accent-color: #16a085;
-            --accent-hover: #117a65;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            flex: 1;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-        header p {
-            font-size: 1.2rem;
-            color: #7f8c8d;
-            margin: 0;
-        }
-        .card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-            transition: transform 0.2s ease;
-        }
-        .card:hover {
-            transform: translateY(-2px);
-        }
-        .card h2 {
-            margin-top: 0;
-            color: var(--accent-color);
-            font-size: 1.5rem;
-        }
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-        .btn:hover {
-            background-color: var(--accent-hover);
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #95a5a6;
-            background: #eef2f1;
-            margin-top: auto;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <header>
-            <h1>Willkommen auf meiner Seite</h1>
-            <p>Digitaler Spielplatz & Projekt-Sandbox</p>
-        </header>
-
-        <main>
-            <div class="card">
-                <h2>Über dieses Projekt</h2>
-                <p>Diese Webseite wird komplett kostenlos über <strong>GitHub Pages</strong> gehostet. Sie dient als zentraler Ort, um Ideen auszuprobieren, Code zu testen oder Workflows zu dokumentieren.</p>
-            </div>
-
-            <div class="card">
-                <h2>Aktuelle Fokusbereiche</h2>
-                <p>Egal ob technische Planungen, Skripte oder digitale Notizen – hier entsteht Stück für Stück eine Übersicht meiner Arbeiten und Experimente.</p>
-                <a href="https://github.com" target="_blank" class="btn">Mein GitHub Profil</a>
-            </div>
-        </main>
-    </div>
-
-    <footer>
-        <p>&copy; 2026 Gehostet via GitHub Pages</p>
-    </footer>
-
-</body>
-</html>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style>
+  #tegla-referenzkarte {
+    width: 100% !important;
+    height: 600px !important;
+    min-height: 600px !important;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    z-index: 10;
+    display: block !important;
+  }
+  .tegla-popup h3 { margin: 0 0 5px 0; font-size: 16px; color: #1a365d; font-family: sans-serif; }
+  .tegla-popup p { margin: 0 0 8px 0; font-size: 13px; color: #4a5568; font-family: sans-serif; line-height: 1.4; }
+  .tegla-popup img { width: 100%; height: auto; border-radius: 4px; margin-top: 5px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); display: block; }
+</style>
+<div id="tegla-referenzkarte"></div>
+<script>
+function initTeglaMap() {
+  var map = L.map('tegla-referenzkarte');
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  var projekte = [
+    {coords: [52.3659, 13.0903], titel: "Freianlagen IGG", infos: "<b>Projekt:</b> Spielplatz-Park-Jugendtreff<br><b>Adresse:</b> Falkenhorst 23, 14478 Potsdam<br><b>Leistung:</b> Realisierung der Freianlagen"},
+    {coords: [52.4150, 13.4350], titel: "Zukunftsquartier Buckower Felder", infos: "<b>Projekt:</b> Rigolensystem Buckower Damm<br><b>Bereich:</b> Innovative Regenwasserbewirtschaftung / Schwammstadt<br><b>Leistung:</b> Tiefbeet-, Mulden- & Rigolenanlagen"},
+    {coords: [52.3168, 13.2929], titel: "TAG (Partner: FREYLER Industriebau)", infos: "<b>Projekt:</b> Bauvorhaben Gewerbepark Ludwigsfelde<br><b>Adresse:</b> Löwenbrucher Ring 3, 14974 Ludwigsfelde<br><b>Gewerke:</b> Erdbau / Tiefbau / Entwässerung"},
+    {coords: [52.5165, 13.3283], titel: "PTB Berlin – Stammgelände Nord (Observatorium / Torhaus Nord)", infos: "<b>Projekt:</b> Freianlagen und Verkehrswegebauarbeiten<br><b>Adresse:</b> Marchstraße / Einfahrt Torhaus Nord, 10587 Berlin<br><b>Leistung:</b> Hochwertige Außenanlagengestaltung:<br>• Anthrazitfarbenes Betonwerksteinpflaster mit Natursteinvorsatz, gelb-beige Kantensteine.<br>• Neue verkehrstechnische Hauptzufahrt mit Ampelanlagen und Versenkpollern.<br>• Automatische Bewässerungsanlagen für Pflanzflächen und historische Wiesenbereiche.<br><a href='HIER_MEDIEN_URL_EINFUEGEN' target='_blank'><img src='HIER_MEDIEN_URL_EINFUEGEN' alt='TEGLA Realisierung PTB Berlin Nord' title='Klicken zum Vergrößern'></a>"},
+    {coords: [52.3685, 12.9234], titel: "Evangelischer Bildungscampus Werder", infos: "<b>Projekt:</b> Neubau Schulcampus Glindow<br><b>Adresse:</b> Zum Schulcampus, 14542 Werder (Havel)<br><b>Bereich:</b> Tiefbauarbeiten / Erschließung / Außenanlagen"},
+    {coords: [52.5322, 13.3725], titel: "Bundeswehrkrankenhaus Berlin", infos: "<b>Projekt:</b> Neubau und Umbau Interim OP-Abteilung<br><b>Adresse:</b> Scharnhorststraße 13, 10115 Berlin<br><b>Bereich:</b> Spezialbau / Tiefbau und Infrastruktur"},
+    {coords: [52.3804, 13.0642], titel: "Alfred-Wegener-Institut (AWI)", infos: "<b>Projekt:</b> Bauvorhaben Forschungszentrum Telegrafenberg<br><b>Adresse:</b> Telegrafenberg, 14473 Potsdam<br><b>Bereich:</b> Erdbau / Tiefbau / Außenanlagen"},
+    {coords: [52.3820, 13.0815], titel: "Interims-Grundschule 43 Potsdam", infos: "<b>Projekt:</b> Neubau Schulstandort<br><b>Adresse:</b> Heinrich-Mann-Allee / Nuthewinkel, 14473 Potsdam<br><b>Leistung:</b> Herstellung der Außenanlagen (Garten- und Landschaftsbau)"},
+    {coords: [52.5385, 13.3414], titel: "Berliner Westhafen (Becken 3)", infos: "<b>Projekt:</b> Befestigung Becken 3 / Hafen-Infrastruktur<br><b>Adresse:</b> Westhafenstraße 1, 13353 Berlin<br><b>Bereich:</b> Spezialtiefbau / Ufer- und Geländebefestigung"},
+    {coords: [52.5085, 13.1970], titel: "Spiel- u. Bolzplatz Götelstraße", infos: "<b>Projekt:</b> Neubau / Sanierung Sport- und Freizeitflächen<br><b>Adresse:</b> Götelstraße 70, 13595 Berlin-Spandau<br><b>Leistung:</b> Erdarbeiten / Wegebau / Freianlagengestaltung"},
+    {coords: [52.5312, 13.3860], titel: "Hochschule für Schauspielkunst Ernst Busch", infos: "<b>Projekt:</b> Kavernenbauwerk und Freianlagen<br><b>Adresse:</b> Zinnowitzer Str. 11, 10115 Berlin<br><b>Gewerke:</b> Spezialtiefbau / Erdbau / Außenanlagen"},
+    {coords: [52.5204, 13.3789], titel: "Erweiterung Marie-Elisabeth-Lüders-Haus (MELH)", infos: "<b>Projekt:</b> Außenanlagen des Erweiterungsbaus (Haupteingang)<br><b>Adresse:</b> Luisenstraße / Adele-Schreiber-Krieger-Straße, 10117 Berlin<br><b>Leistung:</b> Wegebau- und Landschaftsarbeiten im Regierungsviertel<br>• Gehwege aus Kleinsteinpflaster, Betonwerkstein- und Naturwerksteinplatten.<br>• Einbindung von Fahrradabstellanlagen, Behindertenstellplätzen und Polleranlagen.<br>• Ausführung über dem UES-Tunnelbauwerk."},
+    {coords: [52.4582, 13.3054], titel: "Gartenanlagen Botanischer Garten Berlin", infos: "<b>Projekt:</b> Erneuerung Italienischer Garten & Umfeld Schaugewächshäuser<br><b>Adresse:</b> Königin-Luise-Str. 6-8, 14195 Berlin<br><b>Leistung:</b> High-End Landschaftsbau und Sanierung im denkmalgeschützten Bestand"},
+    {coords: [52.4286, 13.0460], titel: "Campus am Jungfernsee", infos: "<b>Projekt:</b> Herstellung der Uferwege<br><b>Adresse:</b> Konrad-Wolf-Allee 13-63, 14469 Potsdam<br><b>Leistung:</b> Wegebau und Erschließung der ufernahen Freianlagen"},
+    {coords: [52.4862, 13.4863], titel: "Spreepark Berlin", infos: "<b>Projekt:</b> Umgestaltung des ehemaligen Vergnügungsparks<br><b>Adresse:</b> Kiehnwerderallee 1-3, 12437 Berlin<br><b>Leistung:</b> Herstellung der Bewässerungsanlage für die Park- und Freianlagen"},
+    {coords: [52.5251, 13.3785], titel: "Charité Berlin – Campus Mitte", infos: "<b>Projekt:</b> Sanierung Bettenhochhaus & Neubau OP/ITS<br><b>Adresse:</b> Schumannstraße 20/21, 10117 Berlin<br><b>Leistung:</b> Herstellung der Freianlagen / Garten- und Landschaftsbau<br>• Planung: Neumann Gusenburger"},
+    {coords: [52.5255, 13.3414], titel: "Kleiner Tiergarten / Ottopark", infos: "<b>Projekt:</b> Umgestaltung und Sanierung der historischen Parkanlagen<br><b>Adresse:</b> Turmstraße / Alt-Moabit, 10559 Berlin<br><b>Leistung:</b> Garten- und Landschaftsbauarbeiten im urbanen Raum / Wegebau, Erdarbeiten und Vegetationsflächen"},
+    {coords: [52.5170, 13.3243], titel: "PTB Berlin – Walther-Meißner-Bau", infos: "<b>Projekt:</b> Neubau Laborgebäude für Tieftemperaturmesstechnik (04422)<br><b>Adresse:</b> Abbestraße, 10587 Berlin<br><b>Leistung:</b> Herstellung der Freianlagen, Erdarbeiten und schwingungsfreien Infrastrukturanschlüsse im hochspezialisierten Laborumfeld"},
+    {coords: [52.3784, 13.0982], titel: "Sportforum 'Am Schlaatz' (49)", infos: "<b>Projekt:</b> Neubau Sport- & Freizeitflächen / VE50.1<br><b>Adresse:</b> Schilfhof 29, 14478 Potsdam<br><b>Leistung:</b> GaLaBau Dachbegrünung sowie Außenanlagen im Sportkomplex (AU-2025-04242)"},
+    {coords: [52.3797, 13.1245], titel: "Schulstandort Gagarinstraße", infos: "<b>Projekt:</b> Freianlagen Neubau/Erweiterung<br><b>Adresse:</b> Gagarinstraße 5-7, 14480 Potsdam<br><b>Leistung:</b> Wegebau, Erdarbeiten und landschaftliche Gestaltung des Schulhofs"},
+    {coords: [52.5201, 13.3785], titel: "Marie-Elisabeth-Lüders-Haus (Los 3)", infos: "<b>Projekt:</b> Freitreppe zur Spree<br><b>Adresse:</b> Schiffbauerdamm / Adele-Schreiber-Krieger-Straße, 10117 Berlin<br><b>Leistung:</b> Hochwertige Naturwerkstein- und Betonarbeiten an der monumentalen Freitreppe"},
+    {coords: [52.4136, 13.0382], titel: "Neugestaltung Johan-Bouman-Platz", infos: "<b>Projekt:</b> Urbaner Platz- und Wegebau<br><b>Adresse:</b> Johann-Bouman-Platz, 14469 Potsdam<br><b>Leistung:</b> Pflasterarbeiten, Grünanlagenstrukturen und städtebauliche Aufwertung"},
+    {coords: [52.3821, 13.0779], titel: "Humboldt-Gymnasium Potsdam", infos: "<b>Projekt:</b> Steganlage am Jungfernsee / Freianlagen<br><b>Adresse:</b> Heinrich-Mann-Allee 104 C, 14473 Potsdam<br><b>Leistung:</b> Wasserbauliche Holz- und Steganlagen sowie ufernahe Landschaftsbauarbeiten"},
+    {coords: [52.3920, 13.1310], titel: "Kopernikus-Gymnasium (Schulerweiterung)", infos: "<b>Projekt:</b> Gestaltung der Freianlagen<br><b>Adresse:</b> Kopernikusstraße, 14482 Potsdam<br><b>Leistung:</b> Pausenhofgestaltung, Sportflächenbau und Vegetationsflächen"},
+    {coords: [52.4041, 13.0685], titel: "Bauvorhaben Behlertstraße / Gutenbergstraße", infos: "<b>Projekt:</b> Straßenbegleitendes Stadtgrün & Freianlagen<br><b>Adresse:</b> Behlertstr. 38-44 / Gutenbergstr. 54-57, 14467 Potsdam<br><b>Leistung:</b> Tiefbau, Entwässerungsstrukturen und landschaftliche Rekultivierung"},
+    {coords: [52.3110, 13.2490], titel: "LWF Ludwigsfelde (Partner: Potsdamer Str./Dachsweg)", infos: "<b>Projekt:</b> Landschaftsbauarbeiten Gewerbegebiet<br><b>Adresse:</b> Potsdamer Str. / Dachsweg, 14974 Ludwigsfelde<br><b>Leistung:</b> Großflächige Erdarbeiten, Pflanzungen und Ausgleichsflächen"},
+    {coords: [52.3610, 13.2950], titel: "Trinks Großbeeren", infos: "<b>Projekt:</b> Logistikstandort Infrastruktur<br><b>Adresse:</b> Märkische Allee, 14979 Großbeeren<br><b>Leistung:</b> Erneuerung Rinne und Asphaltaufbruch im Schwerlastbereich"},
+    {coords: [52.4180, 13.0510], titel: "Rote Kaserne Potsdam", infos: "<b>Projekt:</b> Sanierung und Umnutzung Wohnquartier<br><b>Adresse:</b> Nedlitzer Straße, 14469 Potsdam<br><b>Leistung:</b> Denkmalgerechter Wegebau, Erschließung und historische Gartenanlagen"},
+    {coords: [52.4310, 14.1150], titel: "Blücher-Kaserne Stadtgrün", infos: "<b>Projekt:</b> Kasernenareal Freianlagen<br><b>Adresse:</b> Sakrower Landstraße, 14089 Berlin<br><b>Leistung:</b> Infrastruktur-Landschaftsbau, Rasen- und Gehölzpflanzungen"},
+    {coords: [52.3810, 13.1420], titel: "Fertigungshalle Stahnsdorf (Borgers)", infos: "<b>Projekt:</b> Außenanlagen Industriebau<br><b>Adresse:</b> Berliner Str. / Gewerbepark, 14532 Stahnsdorf<br><b>Leistung:</b> Schwerlastpflaster, Entwässerung und repräsentative Werksgrünflächen"},
+    {coords: [52.4471, 13.2809], titel: "FU Berlin – Alter Campus", infos: "<b>Projekt:</b> Sanierung der Außenanlagen<br><b>Adresse:</b> Garystraße 21, 14195 Berlin<br><b>Leistung:</b> Denkmalschutzgerechter Wegebau und Campus-Freiflächengestaltung"},
+    {coords: [52.4129, 12.9699], titel: "Universität Potsdam – Standort Golm", infos: "<b>Projekt:</b> Infrastruktur / Campus-Erschließung<br><b>Adresse:</b> Am Mühlenberg 11, 14476 Potsdam<br><b>Leistung:</b> Rückbau von Medienleitungen, Erdarbeiten und Geländeregulierung"},
+    {coords: [52.3942, 13.0614], titel: "Neuanlage Otto-Braun-Platz Potsdam", infos: "<b>Projekt:</b> Repräsentativer Platzbau am Landtag<br><b>Adresse:</b> Otto-Braun-Platz, 14467 Potsdam<br><b>Leistung:</b> Natursteinpflasterung auf höchstem Niveau, Stadtmöblierung und Einfassungen"},
+    {coords: [52.5195, 13.3725], titel: "Paul-Löbe-Haus / Ringerkolonnade", infos: "<b>Projekt:</b> Außenanlagen Deutscher Bundestag<br><b>Adresse:</b> Konrad-Adenauer-Straße 1, 10557 Berlin<br><b>Leistung:</b> Steubenplatz / Ringerkolonnade historische Rekonstruktion im Regierungsviertel"},
+    {coords: [52.5392, 13.3473], titel: "Robert-Koch-Institut (RKI)", infos: "<b>Projekt:</b> Sicherheitsaußenanlagen Bundesinstitut<br><b>Adresse:</b> Nordufer 20, 13353 Berlin<br><b>Leistung:</b> Wegebau, Zufahrtssicherungen und landschaftliche Begleitplanung"},
+    {coords: [52.2610, 13.2350], titel: "Windpark Ruhlsdorf", infos: "<b>Projekt:</b> Infrastrukturbau / Zuwegung<br><b>Adresse:</b> Feldmark Ruhlsdorf, 14974 Ludwigsfelde<br><b>Leistung:</b> Zuwegungen für Schwerlastkrane, Kranstellflächen und ökologische Baubegleitung"}
+  ];
+  var bounds = L.latLngBounds();
+  projekte.forEach(function(p) {
+    var content = '<div class="tegla-popup"><h3>' + p.titel + '</h3><p>' + p.infos + '</p></div>';
+    L.marker(p.coords).addTo(map).bindPopup(content, { maxWidth: 320 });
+    bounds.extend(p.coords);
+  });
+  setTimeout(function() { map.fitBounds(bounds, { padding: [50, 50] }); map.invalidateSize(); }, 300);
+}
+if (window.jQuery) { jQuery(window).on('load', initTeglaMap); } else { window.addEventListener('load', initTeglaMap); }
+</script>
